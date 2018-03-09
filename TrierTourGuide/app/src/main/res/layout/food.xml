@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/tab_button_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Restaurants" />
+        android:text="@string/tab_title_food" />
 </LinearLayout>

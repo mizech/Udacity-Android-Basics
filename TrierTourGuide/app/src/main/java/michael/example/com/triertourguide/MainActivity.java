@@ -38,17 +38,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tour_guide_toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.tour_guide_view_pager_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.top_head_tabs_navigation);
         tabLayout.setupWithViewPager(mViewPager);
     }
 
@@ -127,16 +127,16 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    Sights sights = new Sights();
+                    SightFragment sights = new SightFragment();
                     return sights;
                 case 1:
-                    Food food = new Food();
+                    FoodFragment food = new FoodFragment();
                     return food;
                 case 2:
-                   Pubs pubs = new Pubs();
+                   PubsFragment pubs = new PubsFragment();
                     return pubs;
                 case 3:
-                    Shopping shopping = new Shopping();
+                    ShoppingFragment shopping = new ShoppingFragment();
                     return shopping;
             }
 
