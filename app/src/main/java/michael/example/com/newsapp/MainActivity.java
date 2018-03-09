@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,21 +58,31 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 return result;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (MalformedURLException exception) {
+                exception.printStackTrace();
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
-
-
 
             return null;
         }
 
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+        protected void onPostExecute(String serverResponse) {
+            super.onPostExecute(serverResponse);
 
-            Log.i("Website Content", result);
+            try {
+                JSONObject serverResponseJson = new JSONObject(serverResponse);
+
+                JSONObject payloadJson = serverResponseJson.getJSONObject("response");
+                JSONArray newsResultsJson = payloadJson.getJSONArray("results");
+
+                Log.i("Website Content", newsResultsJson.toString());
+
+                JSONObject first = newsResultsJson.getJSONObject(0);
+                Log.i("First Object", first.getString("webTitle"));
+            } catch(JSONException exception) {
+                exception.printStackTrace();
+            }
         }
     }
 }
