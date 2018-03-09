@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+    <string name="sub_header">How well to do you know Europe?</string>
+    <string name="question1">How is the capital of France called?</string>
+    <string name="question1_hint">Please enter the name of the city.</string>
+    <string name="question2">Which countries are in Europe?</string>
+    <string name="question3">Where is Italy located in Europe?</string>
+    <string name="question4">Munich is ...</string>
+    <string name="question5">France is a country neighbor to which other country?</string>
+    <string name="north">North</string>
+    <string name="east">East</string>
+    <string name="south">South</string>
+    <string name="west">West</string>
+    <string name="germany">Germany</string>
+    <string name="poland">Poland</string>
+    <string name="denmark">Denmark</string>
+    <string name="checkbox_greece">Greece</string>
+    <string name="checkbox_burma">Burma</string>
+    <string name="checkbox_luxembourg">Luxembourg</string>
+    <string name="evaluate_button">Evaluate Quiz</string>
+    <string name="munich_question_1">The capital of Germany?</string>
+    <string name="munich_question_2">In the German federal state Hessia?</string>
+    <string name="munich_question_3">In the German federal state Bavaria?</string>
+    <string name="reset_button">Reset</string>
+</resources>

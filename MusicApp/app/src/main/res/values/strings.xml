@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MusicalStructure</string>
+    <string name="song_list_title">Songs Available</string>
+    <string name="song_list_instruction">Click to play!</string>
+    <string name="title_activity_playing_song">PlayingSong</string>
+    <string name="title_activity_background_infos">Background Infos</string>
+    <string name="song_playing_title">Currently playing ...</string>
+    <string name="button_go_to_songlist">Back to song list</string>
+    <string name="button_go_to_info">Get additional song infos</string>
+    <string name="title_activity_song_info">SongInfo</string>
+</resources>

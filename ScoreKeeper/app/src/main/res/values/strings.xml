@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Football ScoreKeeper-App</string>
+    <string name="main_label_a">Football-Team A</string>
+    <string name="main_label_b">Football-Team B</string>
+    <string name="button_one_point">1-Point Try</string>
+    <string name="button_two_points">2-Point Try</string>
+    <string name="button_tree_points">3-Points Field</string>
+    <string name="button_six_points">6-Points Touchdown</string>
+    <string name="button_reset">Reset Scores</string>
+</resources>

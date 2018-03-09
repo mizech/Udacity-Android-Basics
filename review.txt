@@ -1,0 +1,20 @@
+URL of my according Git-Repository: 
+https://github.com/mizech/UdacityAndroidBeginner/tree/master/ScoreKeeper
+
+Used devices
+-------------------
+- Emulator: Nexus 5X
+- API-Level: API 15, Android 4.0.3 (IceCreamSandwich)
+- Physical Device: Samsung Galaxy Tab A (2016)
+
+
+Points to take care of.
+-----------------------
+Elements are specified in dp, text is specified in sp.
+Text size must always be defined in sp dimension, dp is used for elements. Please, change this in all your text sizes. You can find more information at this link and at this link.
+Please, set the dimension of all elements to dp instead of px.
+
+
+
+
+./gradlew clean
