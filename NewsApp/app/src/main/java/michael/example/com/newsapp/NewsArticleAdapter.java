@@ -10,14 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     private Context context;
@@ -38,14 +34,12 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         }
 
         NewsArticle newsArticle = getItem(position);
-
         TextView articleTitle = newsArticleView.findViewById(R.id.articleTitle);
         articleTitle.setText(newsArticle.getArticleTitle());
-
-        // Used Stack-Overflow article: https://stackoverflow.com/questions/9945072/convert-string-to-date-in-java
         Date date = new Date();
         String publishingDateString = newsArticle.getPublishingDate();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+
         try {
             date = simpleDateFormat.parse(publishingDateString);
         } catch (ParseException e) {
@@ -54,21 +48,17 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
 
         TextView publishingDate = newsArticleView.findViewById(R.id.publishingDate);
         publishingDate.setText(simpleDateFormat.format(date));
-
         TextView sectionName = newsArticleView.findViewById(R.id.sectionName);
         sectionName.setText("Section: " + newsArticle.getSectionName());
-
         TextView webUrl = newsArticleView.findViewById(R.id.webUrl);
         final String FULL_ARTICLE_URL = newsArticle.getFullArticleUrl();
         webUrl.setText(FULL_ARTICLE_URL);
-
         TextView contributor = newsArticleView.findViewById(R.id.contributor);
         contributor.setText(newsArticle.getContributor());
 
         webUrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Stack-Overflow: https://stackoverflow.com/questions/3004515/sending-an-intent-to-browser-to-open-specific-url
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(FULL_ARTICLE_URL));
                 context.startActivity(intent);

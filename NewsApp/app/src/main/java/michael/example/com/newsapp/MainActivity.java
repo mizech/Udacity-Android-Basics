@@ -7,13 +7,10 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,19 +21,22 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<NewsArticle> newsArticles = new ArrayList<>();
-
-    // Used Stack-Overflow: https://stackoverflow.com/questions/1560788/how-to-check-internet-access-on-android-inetaddress-never-times-out
     private boolean isInternetAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        if (networkInfo == null) {
-            return false;
-        } else if (networkInfo.isConnected() == true) {
-            return true;
+        try {
+            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+            int returnVal = p1.waitFor();
+            boolean reachable = (returnVal == 0);
+            return reachable;
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
 
         return false;
+    }
+
+    private void handleNoDataAvailable() {
+        Intent intent = new Intent(getApplicationContext(), no_data.class);
+        startActivity(intent);
     }
 
     @Override
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         if (isInternetAvailable() == false) {
             Intent intent = new Intent(getApplicationContext(), no_internet.class);
             startActivity(intent);
+            return;
         }
 
         String urlString = "http://content.guardianapis.com/search?q=debates&api-key=test";
@@ -56,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class DownloadJson extends AsyncTask<String, Void, String> {
-        // Doing asynchronous task in Java.
-        // Used documentation: https://developer.android.com/reference/android/os/AsyncTask.html
         @Override
         protected String doInBackground(String... urls) {
 
@@ -67,30 +66,39 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 url = new URL(urls[0]);
-
                 urlConnection = (HttpURLConnection) url.openConnection();
 
-                InputStream in = urlConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(in);
+                if (urlConnection == null) {
+                    Intent intent = new Intent(getApplicationContext(), no_internet.class);
+                    startActivity(intent);
+                }
 
+                InputStream in = urlConnection.getInputStream();
+
+                if (in == null) {
+                    Intent intent = new Intent(getApplicationContext(), no_data.class);
+                    startActivity(intent);
+                }
+
+                InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
 
                 while (data != -1) {
                     char current = (char) data;
-
                     result += current;
-
                     data = reader.read();
                 }
 
                 return result;
             } catch (MalformedURLException exception) {
-                exception.printStackTrace();
+                handleNoDataAvailable();
             } catch (IOException exception) {
-                exception.printStackTrace();
+                handleNoDataAvailable();
+            } catch (Exception exception) {
+                handleNoDataAvailable();
             }
 
-            return null;
+            return "";
         }
 
         protected void onPostExecute(String serverResponse) { // serverResponse is the return-value of doInBackground().
@@ -99,23 +107,17 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject serverResponseJson = new JSONObject(serverResponse);
 
+                if (!serverResponseJson.has("response")) {
+                    handleNoDataAvailable();
+                }
+
                 JSONObject payloadJson = serverResponseJson.getJSONObject("response");
                 JSONArray newsResultsJson = payloadJson.getJSONArray("results");
-                // Validating the received result.
-                if (newsResultsJson.length() == 0) {
-                    Intent intent = new Intent(getApplicationContext(), no_data.class);
-                    startActivity(intent);
-                }
 
                 for (int i = 0; i < newsResultsJson.length(); i++) {
                     JSONObject currentArticle = newsResultsJson.getJSONObject(i);
-
-                    Log.i("WebTitle", currentArticle.getString("webTitle"));
-
                     String articleTitle = currentArticle.getString("webTitle");
                     String sectionName = currentArticle.getString("sectionName");
-
-                    // https://developer.android.com/reference/org/json/JSONObject.html#has(java.lang.String)
                     String contributor = "Contributor not known.";
 
                     if (currentArticle.has("contributor")) {
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                             publishingDate, fullArticleUrl, contributor));
                 }
             } catch (JSONException exception) {
-                exception.printStackTrace();
+                handleNoDataAvailable();
             }
 
             NewsArticleAdapter newsArticleAdapter = new NewsArticleAdapter(getApplicationContext(), newsArticles);
