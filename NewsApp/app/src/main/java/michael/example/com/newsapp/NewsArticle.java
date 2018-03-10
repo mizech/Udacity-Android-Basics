@@ -9,12 +9,15 @@ public class NewsArticle {
     private String sectionName;
     private String publishingDate;
     private String fullArticleUrl;
+    private String contributor;
 
-    public NewsArticle(String articleTitle, String sectionName, String publishingDate, String fullArticleUrl) {
+    public NewsArticle(String articleTitle, String sectionName,
+                       String publishingDate, String fullArticleUrl, String contributor) {
         this.articleTitle = articleTitle;
         this.sectionName = sectionName;
         this.publishingDate = publishingDate;
         this.fullArticleUrl = fullArticleUrl;
+        this.contributor = contributor;
     }
 
     public String getArticleTitle() {
@@ -47,5 +50,9 @@ public class NewsArticle {
 
     public void setFullArticleUrl(String fullArticleUrl) {
         this.fullArticleUrl = fullArticleUrl;
+    }
+
+    public String getContributor() {
+        return this.contributor;
     }
 }

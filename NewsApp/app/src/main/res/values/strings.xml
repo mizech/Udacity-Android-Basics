@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="web_instruction">Click to read full-article:</string>
 </resources>

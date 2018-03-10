@@ -4,14 +4,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
+import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -86,18 +82,32 @@ public class MainActivity extends AppCompatActivity {
 
                     String articleTitle = currentArticle.getString("webTitle");
                     String sectionName = currentArticle.getString("sectionName");
-                    String publishingDate = currentArticle.getString("webPublicationDate");
+
+                    // https://developer.android.com/reference/org/json/JSONObject.html#has(java.lang.String)
+                    String contributor = "Contributor not known.";
+
+                    if (currentArticle.has("contributor")) {
+                        contributor = currentArticle.getString("contributor");
+                    }
+
+                    String publishingDate = "Publ. date unknown.";
+
+                    if (currentArticle.has("webPublicationDate")) {
+                        publishingDate = currentArticle.getString("webPublicationDate");
+                    }
+
                     String fullArticleUrl = currentArticle.getString("webUrl");
 
                     newsArticles.add(new NewsArticle(articleTitle, sectionName,
-                                         publishingDate, fullArticleUrl));
+                                         publishingDate, fullArticleUrl, contributor));
                 }
             } catch(JSONException exception) {
                 exception.printStackTrace();
             }
 
-            Log.i("Test:", newsArticles.get(0).getArticleTitle());
-            Log.i("Test:", newsArticles.get(1).getArticleTitle());
+            NewsArticleAdapter newsArticleAdapter = new NewsArticleAdapter(getApplicationContext(), newsArticles);
+            final ListView listView = findViewById(R.id.newsArticlesListView);
+            listView.setAdapter(newsArticleAdapter);
         }
     }
 }
