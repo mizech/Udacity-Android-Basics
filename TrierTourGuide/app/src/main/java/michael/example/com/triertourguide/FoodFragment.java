@@ -20,8 +20,16 @@ public class FoodFragment extends Fragment {
 
         ArrayList<Location> location = new ArrayList<Location>();
 
-        location.add((new Location("Historischer Keller", "Simeonstrasse 46", "0651 469-496", "info@historischer-keller.de", "http://www.historischer-keller.de/")));
-        location.add((new Location("L'Osteria", "Fleischstraße 56", "0651 14546888", "-", "losteria.de")));
+        location.add((new Location( getResources().getString(R.string.title_historical),
+                                    getResources().getString(R.string.street_historical),
+                                    getResources().getString(R.string.phone_historical),
+                                    getResources().getString(R.string.email_historical),
+                                    getResources().getString(R.string.website_historical))));
+        location.add((new Location( getResources().getString(R.string.title_osteria),
+                                    getResources().getString(R.string.street_osteria),
+                                    getResources().getString(R.string.phone_osteria),
+                                    getResources().getString(R.string.email_osteria),
+                                    getResources().getString(R.string.website_osteria))));
 
         LocationAdapter locationAdapter = new LocationAdapter(getContext(), location);
         final ListView sightsView = view.findViewById(R.id.sights);

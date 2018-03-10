@@ -31,31 +31,6 @@
             android:id="@+id/top_head_tabs_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_left_text" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_left_middle_text" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_right_middle_text" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabItem4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_right_text" />
-
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 

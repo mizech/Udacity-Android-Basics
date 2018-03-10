@@ -21,8 +21,17 @@ public class ShoppingFragment extends Fragment {
 
         ArrayList<Location> location = new ArrayList<Location>();
 
-        location.add((new Location("Karstadt", "Simeonstr. 46", "0651 469 - 0", "info@karstadt.de", "https://www.karstadt.de/on/demandware.store/Sites-Karstadt-Site/de/Stores-Details?StoreID=001261&src=90L100001")));
-        location.add((new Location("Unverpackt Trier", "Paulinstraße 65", "0651 56142563", "unverpackt@telekom.de", "https://www.unverpackt-trier.de/")));
+        location.add((new Location( getResources().getString(R.string.title_karstadt),
+                                    getResources().getString(R.string.street_karstadt),
+                                    getResources().getString(R.string.phone_karstadt),
+                                    getResources().getString(R.string.email_karstadt),
+                                    getResources().getString(R.string.website_karstadt)
+        )));
+        location.add((new Location( getResources().getString(R.string.title_unverpackt),
+                                    getResources().getString(R.string.street_unverpackt),
+                                    getResources().getString(R.string.phone_unverpackt),
+                                    getResources().getString(R.string.email_unverpackt),
+                                    getResources().getString(R.string.website_unverpackt))));
 
         LocationAdapter locationAdapter = new LocationAdapter(getContext(), location);
         final ListView sightsView = view.findViewById(R.id.sights);

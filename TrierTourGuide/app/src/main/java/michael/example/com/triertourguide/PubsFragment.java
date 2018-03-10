@@ -21,8 +21,16 @@ public class PubsFragment extends Fragment {
 
         ArrayList<Location> location = new ArrayList<Location>();
 
-        location.add((new Location("Louisiana", "Johann-Philipp-Straße 5-6", "0651 991 98 99", "louisiana@gmx.de", "http://www.louisiana.de/outlet/trier")));
-        location.add((new Location("Kaffee Mohr", "Fleischstraße 55", "0651 74220", "-", "-")));
+        location.add((new Location( getResources().getString(R.string.title_louisiana),
+                                    getResources().getString(R.string.street_louisiana),
+                                    getResources().getString(R.string.phone_louisiana),
+                                    getResources().getString(R.string.email_louisiana),
+                                    getResources().getString(R.string.website_louisiana))));
+        location.add((new Location( getResources().getString(R.string.title_mohr),
+                                    getResources().getString(R.string.street_mohr),
+                                    getResources().getString(R.string.phone_mohr),
+                                    getResources().getString(R.string.email_mohr),
+                                    getResources().getString(R.string.website_mohr))));
 
         LocationAdapter locationAdapter = new LocationAdapter(getContext(), location);
         final ListView sightsView = view.findViewById(R.id.sights);

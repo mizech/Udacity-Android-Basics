@@ -21,9 +21,21 @@ public class SightFragment extends Fragment {
 
         ArrayList<Location> location = new ArrayList<Location>();
 
-        location.add((new Location("Kaiserthermen", "Am Ostring 5", "012345", "trier.info@telekom.de", "http://www.trier-info.de/kaiserthermen-info")));
-        location.add((new Location("Karl Marx Haus", "Brückenstraße 10", "0163453", "Karl-Marx-Haus@fes.de", "https://www.fes.de/museum-karl-marx-haus/")));
-        location.add((new Location("Amphitheater", "Olewiger Strasse", "0163453", "-", "http://www.trier-info.de/amphitheater-info")));
+        location.add((new Location( getResources().getString(R.string.title_thermen),
+                                    getResources().getString(R.string.street_thermen),
+                                    getResources().getString(R.string.phone_thermen),
+                                    getResources().getString(R.string.email_thermen),
+                                    getResources().getString(R.string.website_thermen))));
+        location.add((new Location( getResources().getString(R.string.title_marx_karl),
+                                    getResources().getString(R.string.street_marx_karl),
+                                    getResources().getString(R.string.phone_marx_karl),
+                                    getResources().getString(R.string.email_marx_karl),
+                                    getResources().getString(R.string.website_marx_karl))));
+        location.add((new Location( getResources().getString(R.string.title_amphi),
+                                    getResources().getString(R.string.street_amphi),
+                                    getResources().getString(R.string.phone_amphi),
+                                    getResources().getString(R.string.email_amphi),
+                                    getResources().getString(R.string.website_amphi))));
 
         LocationAdapter locationAdapter = new LocationAdapter(getContext(), location);
         final ListView sightsView = view.findViewById(R.id.sights);
