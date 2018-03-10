@@ -1,13 +1,19 @@
 package michael.example.com.newsapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,10 +25,29 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<NewsArticle> newsArticles = new ArrayList<>();
 
+    // Used Stack-Overflow: https://stackoverflow.com/questions/1560788/how-to-check-internet-access-on-android-inetaddress-never-times-out
+    private boolean isInternetAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo == null) {
+            return false;
+        } else if (networkInfo.isConnected() == true) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (isInternetAvailable() == false) {
+            Intent intent = new Intent(getApplicationContext(), no_internet.class);
+            startActivity(intent);
+        }
 
         String urlString = "http://content.guardianapis.com/search?q=debates&api-key=test";
 
@@ -76,9 +101,16 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject payloadJson = serverResponseJson.getJSONObject("response");
                 JSONArray newsResultsJson = payloadJson.getJSONArray("results");
+                // Validating the received result.
+                if (newsResultsJson.length() == 0) {
+                    Intent intent = new Intent(getApplicationContext(), no_data.class);
+                    startActivity(intent);
+                }
 
                 for (int i = 0; i < newsResultsJson.length(); i++) {
                     JSONObject currentArticle = newsResultsJson.getJSONObject(i);
+
+                    Log.i("WebTitle", currentArticle.getString("webTitle"));
 
                     String articleTitle = currentArticle.getString("webTitle");
                     String sectionName = currentArticle.getString("sectionName");
@@ -90,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         contributor = currentArticle.getString("contributor");
                     }
 
-                    String publishingDate = "Publ. date unknown.";
+                    String publishingDate = "Publ.-date unknown.";
 
                     if (currentArticle.has("webPublicationDate")) {
                         publishingDate = currentArticle.getString("webPublicationDate");
@@ -99,9 +131,9 @@ public class MainActivity extends AppCompatActivity {
                     String fullArticleUrl = currentArticle.getString("webUrl");
 
                     newsArticles.add(new NewsArticle(articleTitle, sectionName,
-                                         publishingDate, fullArticleUrl, contributor));
+                            publishingDate, fullArticleUrl, contributor));
                 }
-            } catch(JSONException exception) {
+            } catch (JSONException exception) {
                 exception.printStackTrace();
             }
 
