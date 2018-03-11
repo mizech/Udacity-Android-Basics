@@ -23,6 +23,11 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         this.context = context;
     }
 
+    public NewsArticleAdapter(@NonNull Context context) {
+        super(context, 0, new ArrayList<NewsArticle>());
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

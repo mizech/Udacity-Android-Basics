@@ -1,13 +1,11 @@
 package michael.example.com.newsapp;
 
 import android.content.Context;
-import android.content.AsyncTaskLoader;
 import android.content.Intent;
-
+import android.content.AsyncTaskLoader;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,16 +15,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by michael on 10.03.18.
- */
-
 public class NewsArticlesLoader extends AsyncTaskLoader<List<NewsArticle>> {
-    private String usedUrl;
+    private static String usedUrl;
 
-    public NewsArticlesLoader(Context context, String url) {
+    public NewsArticlesLoader(Context context, String urlToUse) {
         super(context);
-        this.usedUrl = url;
+        this.usedUrl = urlToUse;
     }
 
     private void handleNoDataAvailable() {

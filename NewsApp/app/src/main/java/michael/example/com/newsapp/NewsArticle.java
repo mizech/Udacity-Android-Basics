@@ -24,32 +24,16 @@ public class NewsArticle {
         return articleTitle;
     }
 
-    public void setArticleTitle(String articleTitle) {
-        this.articleTitle = articleTitle;
-    }
-
     public String getSectionName() {
         return sectionName;
-    }
-
-    public void setSectionName(String sectionName) {
-        this.sectionName = sectionName;
     }
 
     public String getPublishingDate() {
         return publishingDate;
     }
 
-    public void setPublishingDate(String publishingDate) {
-        this.publishingDate = publishingDate;
-    }
-
     public String getFullArticleUrl() {
         return fullArticleUrl;
-    }
-
-    public void setFullArticleUrl(String fullArticleUrl) {
-        this.fullArticleUrl = fullArticleUrl;
     }
 
     public String getContributor() {
