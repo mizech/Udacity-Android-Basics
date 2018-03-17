@@ -2,9 +2,11 @@ package michael.example.com.newsapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import android.preference.PreferenceManager;
 
 public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     private Context context;
@@ -50,6 +53,12 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String val = prefs.getString("min_magnitude", null);
+
+        Log.i("Value: ", val);
+
 
         TextView publishingDate = newsArticleView.findViewById(R.id.publishingDate);
         publishingDate.setText(simpleDateFormat.format(date));
