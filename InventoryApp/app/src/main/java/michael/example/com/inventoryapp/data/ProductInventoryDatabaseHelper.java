@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import michael.example.com.inventoryapp.data.ProductInventoryContract.ProductItem;
 
 public class ProductInventoryDatabaseHelper extends SQLiteOpenHelper {

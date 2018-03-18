@@ -24,20 +24,26 @@ public class CrudHelper {
         values.put(ProductItem.SUPPLIER_PHONE_NUMBER, "0123456");
 
         database.insert(ProductItem.TABLE_NAME, null, values);
-        /*
-        String insertInto = "INSERT INTO " + ProductItem.TABLE_NAME + "(" +
-                ProductItem.PRODUCT_NAME + ", "  + ProductItem.PRICE + ", " +
-                ProductItem.QUANTITY + ", " + ProductItem.SUPPLIER_NAME + ", " +
-                ProductItem.SUPPLIER_PHONE_NUMBER +
-                ") VALUES ('TestProductName', 9.99, 8, 'TestSupplierName', '012345')";
-
-        database.execSQL(insertInto);
-        */
     }
 
-    /*
-    private Cursor queryData(){
 
+    public Cursor queryData(){
+        String[] projection = {
+                ProductItem.PRODUCT_NAME,
+                ProductItem.PRICE,
+                ProductItem.QUANTITY,
+                ProductItem.SUPPLIER_NAME,
+                ProductItem.SUPPLIER_PHONE_NUMBER
+        };
+
+        String selection = ProductItem._ID + "= 1";
+
+        Cursor cursor =
+                database.query(ProductItem.TABLE_NAME, projection,
+                               selection, null, null,
+                        null, null);
+
+        return cursor;
     }
-    */
+
 }
