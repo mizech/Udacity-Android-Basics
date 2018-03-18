@@ -7,6 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference minMagnitude = findPreference(getString(R.string.settings_min_magnitude_key));
+            Preference minMagnitude = findPreference(getString(R.string.settings_max_articles_key));
             bindPreferenceSummaryToValue(minMagnitude);
 
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
@@ -54,7 +55,14 @@ public class SettingsActivity extends AppCompatActivity {
                     preference.setSummary(labels[prefIndex]);
                 }
             } else {
-                preference.setSummary(stringValue);
+                int num = Integer.parseInt(stringValue);
+
+                if (num > 0 && num <= 8) {
+                    preference.setSummary(stringValue);
+                } else {
+                    Toast toast = Toast.makeText(getActivity(), getString(R.string.settings_hint_range_articles_count), Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
 
             return true;

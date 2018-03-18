@@ -46,19 +46,13 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         articleTitle.setText(newsArticle.getArticleTitle());
         Date date = new Date();
         String publishingDateString = newsArticle.getPublishingDate();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
 
         try {
             date = simpleDateFormat.parse(publishingDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String val = prefs.getString("min_magnitude", null);
-
-        Log.i("Value: ", val);
-
 
         TextView publishingDate = newsArticleView.findViewById(R.id.publishingDate);
         publishingDate.setText(simpleDateFormat.format(date));

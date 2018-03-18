@@ -3,12 +3,16 @@ package michael.example.com.newsapp;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsArticle>> {
@@ -51,7 +55,37 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<NewsArticle>> loader, List<NewsArticle> newsList) {
-        newsArticleAdapter = new NewsArticleAdapter(getApplicationContext(), (ArrayList)newsList);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        String maxArticles = prefs.getString("max_articles", null);
+        String orderBy = prefs.getString("order_by", null);
+        int maxCountArticles = 8;
+
+        try {
+            if (maxArticles != null && !"".equals(maxArticles)) {
+                maxCountArticles = Integer.parseInt(maxArticles);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            maxCountArticles = 8;
+        }
+
+        ArrayList<NewsArticle> adaptedNewsList = new ArrayList<>();
+
+        try {
+            if (orderBy != null && !"".equals(orderBy) && orderBy.equals("desc")) {
+                Collections.reverse(newsList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < maxCountArticles; i++) {
+            adaptedNewsList.add(newsList.get(i));
+        }
+
+        newsArticleAdapter = new NewsArticleAdapter(getApplicationContext(), adaptedNewsList);
+
         final ListView listView = findViewById(R.id.newsArticlesListView);
         listView.setAdapter(newsArticleAdapter);
     }
