@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -16,33 +16,25 @@ import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsArticle>> {
-    private final String URL = "http://content.guardianapis.com/search?q=debates&api-key=test";
+    private final String URL = "http://content.guardianapis.com/search?q=debates&api-key=test&show-tags=contributor";
     private final int ID_LOADER = 1;
     private NewsArticleAdapter newsArticleAdapter = null;
-
-    private boolean isInternetAvailable() {
-        try {
-            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
-            int returnVal = p1.waitFor();
-            boolean reachable = (returnVal == 0);
-            return reachable;
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
-        return false;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (isInternetAvailable() == false) {
+        /*
+        Boolean reachable = Settings.System.getInt(getApplicationContext().getContentResolver(),
+                Settings.System.AIRPLANE_MODE_ON, 0) == 0;
+
+        if (reachable == false) {
             Intent intent = new Intent(getApplicationContext(), no_internet.class);
             startActivity(intent);
             return;
         }
+        */
 
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(ID_LOADER, null, this);;

@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Second value", testCursor.getString(1));
 
                 Log.e("ProductName Value", testCursor.getString(productNameIndex));
-                Log.e("Price Value", testCursor.getInt(priceIndex) + "");
+                Log.e("Price-Value", testCursor.getInt(priceIndex) + "");
                 Log.e("Quantity Value", testCursor.getInt(quantityIndex) + "");
                 Log.e("SupplierName Value", testCursor.getString(supplieNameIndex) + "");
                 Log.e("SupplierPhoneNum Value", testCursor.getString(suppliePhoneNumberIndex) + "");
@@ -64,6 +64,5 @@ public class MainActivity extends AppCompatActivity {
         } finally {
             testCursor.close();
         }
-
     }
 }

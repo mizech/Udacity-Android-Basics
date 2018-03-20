@@ -2,11 +2,9 @@ package michael.example.com.newsapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import android.preference.PreferenceManager;
 
 public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     private Context context;
@@ -46,16 +43,18 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         articleTitle.setText(newsArticle.getArticleTitle());
         Date date = new Date();
         String publishingDateString = newsArticle.getPublishingDate();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
-
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+        String stringDate = "";
         try {
             date = simpleDateFormat.parse(publishingDateString);
+            stringDate = new SimpleDateFormat("dd.MM.yyyy, HH:mm").format(date);
         } catch (ParseException e) {
             e.printStackTrace();
+            stringDate = "Date not available.";
         }
 
         TextView publishingDate = newsArticleView.findViewById(R.id.publishingDate);
-        publishingDate.setText(simpleDateFormat.format(date));
+        publishingDate.setText(stringDate);
         TextView sectionName = newsArticleView.findViewById(R.id.sectionName);
         sectionName.setText("Section: " + newsArticle.getSectionName());
         TextView webUrl = newsArticleView.findViewById(R.id.webUrl);

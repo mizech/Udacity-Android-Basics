@@ -3,6 +3,8 @@ package michael.example.com.newsapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.AsyncTaskLoader;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,10 +96,26 @@ public class NewsArticlesLoader extends AsyncTaskLoader<List<NewsArticle>> {
                 JSONObject currentArticle = newsResultsJson.getJSONObject(i);
                 String articleTitle = currentArticle.getString("webTitle");
                 String sectionName = currentArticle.getString("sectionName");
-                String contributor = "Contributor not known.";
+                String contributor = "";
 
-                if (currentArticle.has("contributor")) {
-                    contributor = currentArticle.getString("contributor");
+
+                if (currentArticle.has("tags")) {
+                    JSONArray tags = currentArticle.getJSONArray("tags");
+
+                    for (int j = 0; j < tags.length(); j++) {
+                        Object plainObject = tags.get(j);
+
+                        JSONObject jsonObject = (JSONObject)plainObject;
+                        contributor += jsonObject.getString("webTitle") + ", ";
+                    }
+                }
+
+                if (contributor.length() > 2 ) {
+                    contributor = contributor.substring(0, contributor.length() - 2);
+                }
+
+                if (contributor.length() == 0) {
+                    contributor = "Contributor not known.";
                 }
 
                 String publishingDate = "Publ.-date unknown.";
