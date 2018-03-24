@@ -20,21 +20,46 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private final int ID_LOADER = 1;
     private NewsArticleAdapter newsArticleAdapter = null;
 
+    private boolean isInternetNotAvailable() {
+        Boolean unreachable = false;
+
+        try {
+            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+            int returnVal = p1.waitFor();
+            unreachable = (returnVal != 0);
+
+            if (unreachable == true) {
+                return unreachable;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        try {
+            unreachable = Settings.System.getInt(getApplicationContext().getContentResolver(),
+                    Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+
+            if (unreachable == true) {
+                return unreachable;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-        Boolean reachable = Settings.System.getInt(getApplicationContext().getContentResolver(),
-                Settings.System.AIRPLANE_MODE_ON, 0) == 0;
-
-        if (reachable == false) {
+        if (isInternetNotAvailable() == true) {
             Intent intent = new Intent(getApplicationContext(), no_internet.class);
             startActivity(intent);
             return;
         }
-        */
 
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(ID_LOADER, null, this);;
@@ -73,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         for (int i = 0; i < maxCountArticles; i++) {
-            adaptedNewsList.add(newsList.get(i));
+            if (i < newsList.size()) {
+                adaptedNewsList.add(newsList.get(i));
+            }
         }
 
         newsArticleAdapter = new NewsArticleAdapter(getApplicationContext(), adaptedNewsList);

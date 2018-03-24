@@ -12,7 +12,7 @@
     <string name="settings_hint_range_articles_count">Please enter a number between 1 and 8.</string>
     <string name="settings_max_articles_key" translatable="false">max_articles</string>
     <string name="settings_max_articles_default" translatable="false">8</string>
-    <string name="settings_order_by_label">Order by Publish Date</string>
+    <string name="settings_order_by_label">Order</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
     <string name="settings_order_by_default" translatable="false">@string/settings_order_by_ascending_value</string>
     <string name="settings_order_by_ascending_label">Ascending</string>

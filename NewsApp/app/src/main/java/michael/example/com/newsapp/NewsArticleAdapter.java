@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
     private Context context;
@@ -41,13 +42,13 @@ public class NewsArticleAdapter extends ArrayAdapter<NewsArticle> {
         NewsArticle newsArticle = getItem(position);
         TextView articleTitle = newsArticleView.findViewById(R.id.articleTitle);
         articleTitle.setText(newsArticle.getArticleTitle());
-        Date date = new Date();
+        Date date;
         String publishingDateString = newsArticle.getPublishingDate();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         String stringDate = "";
         try {
             date = simpleDateFormat.parse(publishingDateString);
-            stringDate = new SimpleDateFormat("dd.MM.yyyy, HH:mm").format(date);
+            stringDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(date);
         } catch (ParseException e) {
             e.printStackTrace();
             stringDate = "Date not available.";
