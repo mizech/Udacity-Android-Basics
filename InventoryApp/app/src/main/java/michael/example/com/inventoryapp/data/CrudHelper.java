@@ -36,11 +36,11 @@ public class CrudHelper {
                 ProductItem.SUPPLIER_PHONE_NUMBER
         };
 
-        String selection = ProductItem._ID + "= 1";
+        // String selection = ProductItem._ID + "= 1";
 
         Cursor cursor =
                 database.query(ProductItem.TABLE_NAME, projection,
-                               selection, null, null,
+                               null, null, null,
                         null, null);
 
         return cursor;
