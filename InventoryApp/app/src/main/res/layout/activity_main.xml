@@ -1,18 +1,40 @@
+<!--
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="michael.example.com.inventoryapp.MainActivity">
+    android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/artist_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello, out there!!!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="20dp"
+        android:text="A bit of Dummy-Text!"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
+-->
+
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/productsListView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/productListsEmpty"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:textSize="24sp"
+            android:text="@string/products_list_empty_message"
+            android:id="@+id/messageProductsListEmpty" />
+
+    </LinearLayout>
+    -->
+</ListView>

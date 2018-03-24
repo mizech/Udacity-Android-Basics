@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">InventoryApp</string>
+    <string name="products_list_empty_message">There are no products in the inventory.
+        Please use the Add-Item Button to add products.</string>
 </resources>
