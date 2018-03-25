@@ -26,6 +26,14 @@
         <activity
             android:name=".NoRecords"
             android:label="@string/title_activity_no_records"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditActivity"
+            android:label="@string/title_activity_edit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddActivity"
+            android:label="@string/title_activity_add"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

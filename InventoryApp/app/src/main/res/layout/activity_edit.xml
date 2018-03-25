@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="normal"/>
-    <TextView
+    <EditText
         android:id="@+id/product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="normal"/>
-    <TextView
+    <EditText
         android:id="@+id/product_quantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="normal"/>
-    <TextView
+    <EditText
         android:id="@+id/product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="normal"/>
-    <TextView
+    <EditText
         android:id="@+id/product_supplier_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="normal"/>
-    <TextView
+    <EditText
         android:id="@+id/product_supplier_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,35 +72,14 @@
         android:layout_marginBottom="18dp"
         android:textStyle="bold"/>
     <Button
-        android:id="@+id/delete_product"
-        android:textColor="@color/colorAccent"
+        android:id="@+id/submit_edit"
+        android:textColor="@color/colorWarning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/delete_product_button"/>
-    <Button
-        android:id="@+id/increment_product_quantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_increment"/>
-    <Button
-        android:id="@+id/decrement_product_quantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_decrement"/>
-    <Button
-        android:id="@+id/contact_supplier"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_contact_supplier"/>
-    <Button
-        android:id="@+id/edit_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_edit"/>
+        android:text="@string/button_submit_edit"/>
     <Button
         android:id="@+id/back_to_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_back_main"/>
-
 </LinearLayout>

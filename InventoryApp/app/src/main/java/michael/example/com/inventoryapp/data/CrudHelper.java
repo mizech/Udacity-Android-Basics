@@ -32,6 +32,22 @@ public class CrudHelper {
         database.delete(ProductItem.TABLE_NAME, "_id = " + id, null);
     }
 
+    public void updateProduct(int id, String name, double price, int quantity, String supplierName, String supplierPhoneNumber) {
+        String strSQL = "UPDATE products SET product_name = '" + name +  "', price = " + price +
+                ", quantity = " + quantity + ", supplier_name = '" + supplierName +
+                "', supplier_phone_number = '" + supplierPhoneNumber + "'  WHERE _id = " + id;
+
+        database.execSQL(strSQL);
+    }
+
+    public void insertProduct(String name, double price, int quantity, String supplierName, String supplierPhoneNumber) {
+        String strSQL = "INSERT INTO products (product_name, price, quantity, supplier_name, supplier_phone_number) VALUES ('" +
+                name +  "', " + price + ", " + quantity + ", '" + supplierName + "', '" + supplierPhoneNumber + "')";
+
+        Log.e("INSERT", strSQL);
+        database.execSQL(strSQL);
+    }
+
     public void updateQuantity(int id, int currentQuantity, int direction) {
         int newQuantity;
 

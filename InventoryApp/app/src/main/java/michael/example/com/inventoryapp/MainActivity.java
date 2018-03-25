@@ -1,12 +1,10 @@
 package michael.example.com.inventoryapp;
 
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,13 +27,6 @@ public class MainActivity extends AppCompatActivity {
         database = dbHelper.getWritableDatabase();
         final CrudHelper crudHelper = new CrudHelper(dbHelper);
 
-        crudHelper.insert();
-
-        /*
-        crudHelper.insert();
-        crudHelper.insert();
-        crudHelper.insert();
-        */
         Cursor cursor = database.rawQuery("SELECT * FROM products", null);
 
         int countRecords = cursor.getCount();
@@ -77,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         Button addProduct = findViewById(R.id.add_product);
         addProduct.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BUTTON", "Has been clicked.");
+                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+                startActivity(intent);
             }
         });
     }

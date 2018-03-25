@@ -8,7 +8,10 @@
     <string name="button_decrement">Decrease quantity</string>
     <string name="button_sale">Sale</string>
     <string name="button_back_main">Back to products list</string>
+    <string name="button_edit">Edit shown product</string>
+    <string name="button_insert">Insert product</string>
     <string name="button_contact_supplier">Contact Supplier via phone</string>
+    <string name="button_submit_edit">Submit edit</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="title_activity_no_records">NoRecords</string>
     <string name="label_product_name">Name:</string>
@@ -16,4 +19,11 @@
     <string name="label_price">Price:</string>
     <string name="label_supplier_name">Supplier Name:</string>
     <string name="label_supplier_phone_number">Supplier Phone Name:</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="toast_invalid_product_name">Please enter a product name.</string>
+    <string name="toast_invalid_quantity">Please enter a valid quantity.</string>
+    <string name="toast_invalid_price">Please enter a valid price.</string>
+    <string name="toast_invalid_supplier_name">Please enter a supplier name.</string>
+    <string name="toast_invalid_supplier_phone_number">Please enter a supplier phone number.</string>
 </resources>

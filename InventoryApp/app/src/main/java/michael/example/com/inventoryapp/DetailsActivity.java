@@ -1,25 +1,18 @@
 package michael.example.com.inventoryapp;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import michael.example.com.inventoryapp.data.CrudHelper;
 import michael.example.com.inventoryapp.data.ProductInventoryContract;
 import michael.example.com.inventoryapp.data.ProductInventoryDatabaseHelper;
@@ -73,6 +66,7 @@ public class DetailsActivity extends AppCompatActivity {
         Button increment = findViewById(R.id.increment_product_quantity);
         Button decrement = findViewById(R.id.decrement_product_quantity);
         Button contactSupplier = findViewById(R.id.contact_supplier);
+        Button goToEdit = findViewById(R.id.edit_product);
         Button backToMain = findViewById(R.id.back_to_main);
 
         nameTextView.setText(name);
@@ -80,8 +74,6 @@ public class DetailsActivity extends AppCompatActivity {
         priceTextView.setText(price);
         supplierNameView.setText(supplierName);
         supplierPhoneNumberView.setText(supplierPhoneNumber);
-
-        // increment_product_quantity
 
         deleteProduct.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -126,6 +118,14 @@ public class DetailsActivity extends AppCompatActivity {
                     }
                 }
 
+                startActivity(intent);
+            }
+        });
+
+        goToEdit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), EditActivity.class);
+                intent.putExtra("id", id + "");
                 startActivity(intent);
             }
         });
