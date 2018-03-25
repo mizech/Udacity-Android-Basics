@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +17,12 @@ import java.util.ArrayList;
 import michael.example.com.inventoryapp.data.CrudHelper;
 import michael.example.com.inventoryapp.data.ProductInventoryDatabaseHelper;
 
-/**
- * Created by michael on 24.03.18.
- */
-
 public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
     private final ProductInventoryDatabaseHelper dbHelper;
     private final CrudHelper crudHelper;
 
     public ProductAdapter(Activity context, ArrayList<Product> songList) {
-        // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
-        // the second argument is used when the ArrayAdapter is populating a single TextView.
-        // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
-        // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, songList);
         this.context = context;
         dbHelper = new ProductInventoryDatabaseHelper(getContext());

@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
 
-import michael.example.com.inventoryapp.data.CrudHelper;
 import michael.example.com.inventoryapp.data.ProductInventoryContract;
 import michael.example.com.inventoryapp.data.ProductInventoryDatabaseHelper;
 
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new ProductInventoryDatabaseHelper(this);
         database = dbHelper.getWritableDatabase();
-        final CrudHelper crudHelper = new CrudHelper(dbHelper);
 
         Cursor cursor = database.rawQuery("SELECT * FROM products", null);
 

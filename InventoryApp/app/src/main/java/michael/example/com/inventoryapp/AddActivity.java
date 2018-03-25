@@ -98,6 +98,9 @@ public class AddActivity extends AppCompatActivity {
                 }
 
                 crudHelper.insertProduct(name, parsedPrice, parsedQuantity, supplierName, supplierPhoneNumber);
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
