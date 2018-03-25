@@ -1,6 +1,7 @@
 package michael.example.com.inventoryapp;
 
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
+
+import michael.example.com.inventoryapp.data.CrudHelper;
 import michael.example.com.inventoryapp.data.ProductInventoryContract;
 import michael.example.com.inventoryapp.data.ProductInventoryDatabaseHelper;
 
@@ -23,30 +26,47 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new ProductInventoryDatabaseHelper(this);
-        database = dbHelper.getReadableDatabase();
+        database = dbHelper.getWritableDatabase();
+        final CrudHelper crudHelper = new CrudHelper(dbHelper);
 
-        Cursor testCursor = database.rawQuery("SELECT * FROM products", null);
-        testCursor.moveToFirst();
+        crudHelper.insert();
+
+        /*
+        crudHelper.insert();
+        crudHelper.insert();
+        crudHelper.insert();
+        */
+        Cursor cursor = database.rawQuery("SELECT * FROM products", null);
+
+        int countRecords = cursor.getCount();
+
+        if (countRecords == 0) {
+            Intent intent = new Intent(this, NoRecords.class);
+            startActivity(intent);
+        }
+
+        cursor.moveToFirst();
 
         ArrayList<Product> products = new ArrayList<Product>();
 
         int i = 0;
-        while (i < testCursor.getCount()) {
+        while (i < cursor.getCount()) {
             int productNameId =
-                    testCursor.getColumnIndex(ProductInventoryContract.ProductItem._ID);
+                    cursor.getColumnIndex(ProductInventoryContract.ProductItem._ID);
             int productNameIndex =
-                    testCursor.getColumnIndex(ProductInventoryContract.ProductItem.PRODUCT_NAME);
+                    cursor.getColumnIndex(ProductInventoryContract.ProductItem.PRODUCT_NAME);
             int priceIndex =
-                    testCursor.getColumnIndex(ProductInventoryContract.ProductItem.PRICE);
+                    cursor.getColumnIndex(ProductInventoryContract.ProductItem.PRICE);
             int quantityIndex =
-                    testCursor.getColumnIndex(ProductInventoryContract.ProductItem.QUANTITY);
+                    cursor.getColumnIndex(ProductInventoryContract.ProductItem.QUANTITY);
 
-            int id = testCursor.getInt(productNameId);
-            String name = testCursor.getString(productNameIndex);
-            String price = testCursor.getString(priceIndex);
-            String quantity = testCursor.getString(quantityIndex);
+            int id = cursor.getInt(productNameId);
+            String name = cursor.getString(productNameIndex);
+            String price = cursor.getString(priceIndex);
+            String quantity = cursor.getString(quantityIndex);
 
             products.add(new Product(id, name, Integer.parseInt(quantity),  Double.parseDouble(price), "", ""));
+            cursor.moveToNext();
             i++;
         }
 

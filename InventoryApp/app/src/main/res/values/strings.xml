@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">InventoryApp</string>
     <string name="products_list_empty_message">There are no products in the inventory currently.
-        \nPlease use the Add-Item Button to add products.</string>
+        \nPlease go back and use the Add-Item Button to add products.</string>
     <string name="add_product_button">Add new product</string>
+    <string name="delete_product_button">Delete product</string>
+    <string name="button_increment">Increase quantity</string>
+    <string name="button_decrement">Decrease quantity</string>
+    <string name="button_contact_supplier">Contact Supplier via phone</string>
     <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_no_records">NoRecords</string>
+    <string name="label_product_name">Name:</string>
+    <string name="label_quantity">Quantity:</string>
+    <string name="label_price">Price:</string>
+    <string name="label_supplier_name">Supplier Name:</string>
+    <string name="label_supplier_phone_number">Supplier Phone Name:</string>
 </resources>

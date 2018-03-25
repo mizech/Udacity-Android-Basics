@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="michael.example.com.inventoryapp">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,15 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name=".data.ProductsProvider"
-            android:authorities="michael.example.com.inventoryapp"
-            android:exported="false" />
-
         <activity
             android:name=".DetailsActivity"
+            android:exported="true"
             android:label="@string/title_activity_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NoRecords"
+            android:label="@string/title_activity_no_records"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
