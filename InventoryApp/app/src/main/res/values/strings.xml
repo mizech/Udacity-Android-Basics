@@ -6,6 +6,8 @@
     <string name="delete_product_button">Delete product</string>
     <string name="button_increment">Increase quantity</string>
     <string name="button_decrement">Decrease quantity</string>
+    <string name="button_sale">Sale</string>
+    <string name="button_back_main">Back to products list</string>
     <string name="button_contact_supplier">Contact Supplier via phone</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="title_activity_no_records">NoRecords</string>

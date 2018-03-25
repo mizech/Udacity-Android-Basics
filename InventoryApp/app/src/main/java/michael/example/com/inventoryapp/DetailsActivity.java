@@ -73,6 +73,7 @@ public class DetailsActivity extends AppCompatActivity {
         Button increment = findViewById(R.id.increment_product_quantity);
         Button decrement = findViewById(R.id.decrement_product_quantity);
         Button contactSupplier = findViewById(R.id.contact_supplier);
+        Button backToMain = findViewById(R.id.back_to_main);
 
         nameTextView.setText(name);
         quantityTextView.setText(quantity);
@@ -115,7 +116,6 @@ public class DetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", supplierPhoneNumber, null));
 
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    Log.e("IN", "THERE");
                     ActivityCompat.requestPermissions(DetailsActivity.this, new String[] {Manifest.permission.CALL_PHONE}, 10);
                     return;
                 } else {
@@ -126,6 +126,13 @@ public class DetailsActivity extends AppCompatActivity {
                     }
                 }
 
+                startActivity(intent);
+            }
+        });
+
+        backToMain.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

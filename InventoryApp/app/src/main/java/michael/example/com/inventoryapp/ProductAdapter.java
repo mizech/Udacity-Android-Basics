@@ -10,9 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import java.util.ArrayList;
+
+import michael.example.com.inventoryapp.data.CrudHelper;
+import michael.example.com.inventoryapp.data.ProductInventoryDatabaseHelper;
 
 /**
  * Created by michael on 24.03.18.
@@ -20,6 +24,8 @@ import java.util.ArrayList;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
+    private final ProductInventoryDatabaseHelper dbHelper;
+    private final CrudHelper crudHelper;
 
     public ProductAdapter(Activity context, ArrayList<Product> songList) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
@@ -28,6 +34,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, songList);
         this.context = context;
+        dbHelper = new ProductInventoryDatabaseHelper(getContext());
+        crudHelper = new CrudHelper(dbHelper);
     }
 
     @NonNull
@@ -35,6 +43,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View customView = inflater.inflate(R.layout.item_product, parent, false);
+
+        Button saleButton = customView.findViewById(R.id.button_sale);
 
         Product product = getItem(position);
         TextView nameView = customView.findViewById(R.id.name);
@@ -58,6 +68,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             }
         });
 
+        saleButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                crudHelper.updateQuantity(id, quantity, -1);
+
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         return customView;
     }
