@@ -12,6 +12,10 @@
     <string name="button_insert">Insert product</string>
     <string name="button_contact_supplier">Contact Supplier via phone</string>
     <string name="button_submit_edit">Submit edit</string>
+    <string name="button_delete_yes">Yes</string>
+    <string name="button_delete_no">No</string>
+    <string name="button_deleted_message">Product has been deleted.</string>
+    <string name="button_delete_cancel_message">Delete operation cancelled.</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="title_activity_no_records">NoRecords</string>
     <string name="label_product_name">Name:</string>
@@ -26,4 +30,6 @@
     <string name="toast_invalid_price">Please enter a valid price.</string>
     <string name="toast_invalid_supplier_name">Please enter a supplier name.</string>
     <string name="toast_invalid_supplier_phone_number">Please enter a supplier phone number.</string>
+    <string name="question_delete">Product will be deleted from inventory. Continue?</string>
+    <string name="title_delete">Please confirm deletion!</string>
 </resources>

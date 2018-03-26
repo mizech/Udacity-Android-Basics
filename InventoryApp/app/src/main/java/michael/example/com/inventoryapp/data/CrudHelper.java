@@ -1,6 +1,5 @@
 package michael.example.com.inventoryapp.data;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -13,11 +12,6 @@ public class CrudHelper {
     public CrudHelper(ProductInventoryDatabaseHelper dhHelper) {
         this.dbHelper = dhHelper;
         this.database = this.dbHelper.getWritableDatabase();
-    }
-
-    public void emptyDatabase() {
-        String strSQL = "DELETE FROM products";
-        database.execSQL(strSQL);
     }
 
     public void deleteProduct(int id) {
@@ -43,7 +37,7 @@ public class CrudHelper {
     public void updateQuantity(int id, int currentQuantity, int direction) {
         int newQuantity;
 
-        if (currentQuantity <= 0) {
+        if (currentQuantity <= 0 && direction < 0) {
             return;
         }
 
@@ -56,23 +50,5 @@ public class CrudHelper {
         String strSQL = "UPDATE products SET quantity = " + newQuantity + "  WHERE _id = " + id;
 
         database.execSQL(strSQL);
-    }
-
-    public Cursor queryData(){
-        String[] projection = {
-                ProductItem._ID,
-                ProductItem.PRODUCT_NAME,
-                ProductItem.PRICE,
-                ProductItem.QUANTITY,
-                ProductItem.SUPPLIER_NAME,
-                ProductItem.SUPPLIER_PHONE_NUMBER
-        };
-
-        Cursor cursor =
-                database.query(ProductItem.TABLE_NAME, projection,
-                               null, null, null,
-                        null, null);
-
-        return cursor;
     }
 }

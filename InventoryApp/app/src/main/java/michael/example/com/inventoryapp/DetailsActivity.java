@@ -1,6 +1,7 @@
 package michael.example.com.inventoryapp;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -77,10 +79,34 @@ public class DetailsActivity extends AppCompatActivity {
 
         deleteProduct.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                crudHelper.deleteProduct(Integer.parseInt(id));
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder confirmDeleteDialog = new AlertDialog.Builder(DetailsActivity.this);
+
+                confirmDeleteDialog.setMessage(R.string.question_delete);
+                confirmDeleteDialog.setTitle(R.string.title_delete);
+                confirmDeleteDialog.setPositiveButton(R.string.button_delete_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        crudHelper.deleteProduct(Integer.parseInt(id));
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                R.string.button_deleted_message, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+                confirmDeleteDialog.setNegativeButton(R.string.button_delete_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                R.string.button_delete_cancel_message, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+                confirmDeleteDialog.create();
+                confirmDeleteDialog.show();
             }
         });
 
