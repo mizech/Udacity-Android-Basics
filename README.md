@@ -14,8 +14,8 @@
 
 6. News App, Stage 1: Implement an app which displays recents news stories.
 
-7. News App, Stage 2
+7. News App, Stage 2: Add an preference screen to the news app.
 
 8. Inventory App, Stage 1: Create an app which allows to keep track of items in an inventory.
 
-9. Inventory App, Stage 2
+9. Inventory App, Stage 2: Improve and enhance the user interface of th inventory app.
