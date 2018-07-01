@@ -1,6 +1,6 @@
 # Android Basics by Google Nanodegree Program
 
-## Projects for Udacity Nandegree "Android Basics"
+## Projects for Udacity Nandegree [Android Basics](https://de.udacity.com/course/android-basics-nanodegree-by-google--nd803)
 
 1. Build a Single Screen App: Create a single screen app which displays information about a small business.
 
@@ -19,3 +19,5 @@
 8. Inventory App, Stage 1: Create an app which allows to keep track of items in an inventory.
 
 9. Inventory App, Stage 2: Improve and enhance the user interface of th inventory app.
+
+![certificate](./certificate.png)
